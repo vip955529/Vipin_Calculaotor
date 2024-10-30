@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText editFirstvalue,editSecondvalue;
@@ -29,50 +30,68 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int Firstvalue,Secondvalue,ans;
-                Firstvalue = Integer.parseInt(editFirstvalue.getText().toString());
-                Secondvalue = Integer.parseInt(editSecondvalue.getText().toString());
-
-                ans = Firstvalue + Secondvalue;
-                txtans.setText("Ans is = "+ans);
+                try {
+                    int Firstvalue = Integer.parseInt(editFirstvalue.getText().toString());
+                    int Secondvalue = Integer.parseInt(editSecondvalue.getText().toString());
+                    int ans = Firstvalue + Secondvalue;
+                    txtans.setText("Ans is = " + ans);
+                } catch (NumberFormatException e) {
+                    showToast("Invalid input. Please enter numbers only.");
+                }
             }
         });
 
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int Firstvalue,Secondvalue,ans;
-                Firstvalue = Integer.parseInt(editFirstvalue.getText().toString());
-                Secondvalue = Integer.parseInt(editSecondvalue.getText().toString());
-
-                ans = Firstvalue - Secondvalue;
-                txtans.setText("Ans is = "+ans);
+                try {
+                    int Firstvalue = Integer.parseInt(editFirstvalue.getText().toString());
+                    int Secondvalue = Integer.parseInt(editSecondvalue.getText().toString());
+                    int ans = Firstvalue - Secondvalue;
+                    txtans.setText("Ans is = " + ans);
+                } catch (NumberFormatException e) {
+                    showToast("Invalid input. Please enter numbers only.");
+                }
             }
         });
 
         btnMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int first,second,ans;
-                first = Integer.parseInt(editFirstvalue.getText().toString());
-                second = Integer.parseInt(editSecondvalue.getText().toString());
-
-                ans = first * second;
-                txtans.setText("Ans is = "+ans);
+                try {
+                    int Firstvalue = Integer.parseInt(editFirstvalue.getText().toString());
+                    int Secondvalue = Integer.parseInt(editSecondvalue.getText().toString());
+                    int ans = Firstvalue * Secondvalue;
+                    txtans.setText("Ans is = " + ans);
+                } catch (NumberFormatException e) {
+                    showToast("Invalid input. Please enter numbers only.");
+                }
             }
         });
+
         btnDiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int Firstvalue,Secondvalue,ans;
-                Firstvalue = Integer.parseInt(editFirstvalue.getText().toString());
-                Secondvalue = Integer.parseInt(editSecondvalue.getText().toString());
-
-                ans = Firstvalue / Secondvalue;
-                txtans.setText("Ans is = "+ans);
+                try {
+                    int Firstvalue = Integer.parseInt(editFirstvalue.getText().toString());
+                    int Secondvalue = Integer.parseInt(editSecondvalue.getText().toString());
+                    if (Secondvalue == 0) {
+                        showToast("Cannot divide by zero.");
+                    } else {
+                        int ans = Firstvalue / Secondvalue;
+                        txtans.setText("Ans is = " + ans);
+                    }
+                } catch (NumberFormatException e) {
+                    showToast("Invalid input. Please enter numbers only.");
+                } catch (ArithmeticException e) {
+                    showToast("Arithmetic error occurred.");
+                }
             }
         });
 
 
+    }
+    private void showToast(String message) {
+        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 }
